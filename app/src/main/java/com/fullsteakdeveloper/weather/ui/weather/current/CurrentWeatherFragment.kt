@@ -36,10 +36,10 @@ class CurrentWeatherFragment : Fragment() {
         val apiService = ApiXuWeatherApiService()
 
         GlobalScope.launch(Dispatchers.Main) {
-            val currentWeatherResponse = apiService.getCurrentWeather("New York").await()
+            val currentWeatherResponse = apiService.getCurrentWeather("Jakarta, Indonesia").await()
 
             Log.d("TAG","RESPONSE $currentWeatherResponse")
-            textView_CurrentWeather.text = currentWeatherResponse.CurrentWeatherEntity.toString()
+            textView_CurrentWeather.text = currentWeatherResponse.location.toString()
             Log.d("TAG", "${currentWeatherResponse.RequestWeatherEntity}" )
 
         }

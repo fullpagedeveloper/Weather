@@ -1,7 +1,11 @@
 package com.fullsteakdeveloper.weather.data.reponse
 
+import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
+const val CURRENT_WEATHER = 0
 
 data class CurrentWeatherResponse(
 
@@ -15,6 +19,7 @@ data class CurrentWeatherResponse(
 	val location: Location? = null
 )
 
+@Entity(tableName = "request_weather_entity")
 data class RequestWeatherEntity(
 
 	@field:SerializedName("unit")
@@ -30,6 +35,7 @@ data class RequestWeatherEntity(
 	val type: String? = null
 )
 
+@Entity(tableName = "location")
 data class Location(
 
 	@field:SerializedName("localtime")
@@ -60,8 +66,10 @@ data class Location(
 	val lat: String? = null
 )
 
+@Entity(tableName = "current_weather_entity")
 data class CurrentWeatherEntity(
 
+	@Embedded(prefix = "weather_description_")
 	@field:SerializedName("weather_descriptions")
 	val weatherDescriptions: List<String?>? = null,
 
@@ -74,6 +82,7 @@ data class CurrentWeatherEntity(
 	@field:SerializedName("visibility")
 	val visibility: Int? = null,
 
+	@Embedded(prefix = "weather_icons_")
 	@field:SerializedName("weather_icons")
 	val weatherIcons: List<String?>? = null,
 
@@ -93,7 +102,7 @@ data class CurrentWeatherEntity(
 	val cloudcover: Int? = null,
 
 	@field:SerializedName("precip")
-	val precip: Int? = null,
+	val precip: Double? = null,
 
 	@field:SerializedName("uv_index")
 	val uvIndex: Int? = null,
@@ -109,8 +118,12 @@ data class CurrentWeatherEntity(
 
 	@field:SerializedName("weather_code")
 	val weatherCode: Int? = null
-)
+) {
+	@PrimaryKey(autoGenerate = false)
+	var id: Int = CURRENT_WEATHER
+}
 
+//Error
 data class Response(
 
 	@field:SerializedName("success")
