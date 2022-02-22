@@ -1,6 +1,7 @@
 package com.fullsteakdeveloper.weather.data
 
 import android.util.Log
+import com.fullsteakdeveloper.weather.data.reponse.ConnectivityInterceptor
 import com.fullsteakdeveloper.weather.data.reponse.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -10,7 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.concurrent.TimeUnit
 
 const val BASE_URL = "http://api.weatherstack.com/"
 const val API_KEY = "d9eaeda4ed5578f5dc4833c1f7661085"
@@ -25,7 +25,7 @@ interface ApiXuWeatherApiService {
 
 
     companion object {
-        operator fun invoke() : ApiXuWeatherApiService {
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): ApiXuWeatherApiService {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
@@ -43,6 +43,7 @@ interface ApiXuWeatherApiService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addNetworkInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()

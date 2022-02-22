@@ -53,6 +53,9 @@ dependencies {
     //room
     implementation("androidx.room:room-runtime:$room_version")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
+    kapt "androidx.room:room-compiler:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+
 
     //gson
     implementation "com.google.code.gson:gson:2.8.6"

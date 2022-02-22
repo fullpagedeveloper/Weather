@@ -18,5 +18,11 @@ data class ImperialCurrentWeatherEntity(
     @ColumnInfo(name = "feelslike")
     override val feelsLikeTemperature: Double,
     @ColumnInfo(name = "visibility")
-    override val visibilityDistance: Double
+    override val visibilityDistance: Double,
+    @ColumnInfo(name = "request")
+    override val requestWeatherEntity: String,
+    @ColumnInfo(name = "current")
+    override val currentWeatherEntity: String,
+    @ColumnInfo(name = "location")
+    override val location: String
 ) : UnitSpecificCurrentWeather

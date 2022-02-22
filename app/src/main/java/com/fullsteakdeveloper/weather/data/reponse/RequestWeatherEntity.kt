@@ -7,14 +7,18 @@ import com.google.gson.annotations.SerializedName
 
 const val CURRENT_WEATHER = 0
 
+@Entity(tableName = "current_weather_response")
 data class CurrentWeatherResponse(
 
+	@Embedded(prefix = "request_")
 	@field:SerializedName("request")
-	val RequestWeatherEntity: RequestWeatherEntity? = null,
+	val requestWeatherEntity: RequestWeatherEntity? = null,
 
+	@Embedded(prefix = "current_")
 	@field:SerializedName("current")
-	val CurrentWeatherEntity: CurrentWeatherEntity? = null,
+	val currentWeatherEntity: CurrentWeatherEntity? = null,
 
+	@Embedded(prefix = "location_")
 	@field:SerializedName("location")
 	val location: Location? = null
 )

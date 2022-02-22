@@ -9,4 +9,7 @@ interface UnitSpecificCurrentWeather {
     val precipitationVolume: Double
     val feelsLikeTemperature: Double
     val visibilityDistance: Double
+    val requestWeatherEntity: String
+    val currentWeatherEntity: String
+    val location: String
 }
